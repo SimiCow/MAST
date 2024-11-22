@@ -2,12 +2,15 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from './src/components/screens/HomeScreen';
-import AddMenuItemScreen from './src/components/screens/AddMenuItemScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import AddMenuItemScreen from './src/screens/AddMenuItemScreen';
+import FilterScreen from './src/screens/FilterScreen';
+import { MenuItem } from './src/types';
 
 export type RootStackParamList = {
   Home: undefined;
-  AddMenuItem: undefined;
+  AddMenuItem: { setMenuItems: React.Dispatch<React.SetStateAction<MenuItem[]>> }
+  Filter: { menuItems: MenuItem[]; filterByCourse: (course: string) => MenuItem[] };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -25,6 +28,11 @@ const App = () => {
           name="AddMenuItem" 
           component={AddMenuItemScreen} 
           options={{ title: 'Add Menu Item' }} 
+        />
+        <Stack.Screen
+          name="Filter"
+          component={FilterScreen}
+          options={{ title: 'Filter by Course' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

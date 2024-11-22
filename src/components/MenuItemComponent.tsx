@@ -1,13 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  course: string;
-  price: number;
-}
+import { MenuItem } from '../types';
 
 interface Props {
   item: MenuItem;
@@ -20,7 +13,7 @@ const MenuItemComponent: React.FC<Props> = ({ item }) => {
       <Text style={styles.description}>{item.description}</Text>
       <View style={styles.details}>
         <Text style={styles.course}>{item.course}</Text>
-        <Text style={styles.price}>${item.price.toFixed(2)}</Text>
+        <Text style={styles.price}>R{item.price.toFixed(2)}</Text>
       </View>
     </View>
   );
