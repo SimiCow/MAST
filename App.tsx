@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+import HomeScreen from './src/components/screens/HomeScreen';
+import AddMenuItemScreen from './src/components/screens/AddMenuItemScreen';
+
+export type RootStackParamList = {
+  Home: undefined;
+  AddMenuItem: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ title: "Christoffel's Menu" }}
+        />
+        <Stack.Screen 
+          name="AddMenuItem" 
+          component={AddMenuItemScreen} 
+          options={{ title: 'Add Menu Item' }} 
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
